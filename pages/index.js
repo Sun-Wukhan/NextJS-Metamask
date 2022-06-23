@@ -1,6 +1,7 @@
-import Head from 'next/head'
+
 import styled from 'styled-components'
 import { useWeb3 } from '@3rdweb/hooks'
+import Dashboard from './Dashboard';
 
 export default function Home() {
   const {address, connectWallet } = useWeb3();
@@ -9,9 +10,10 @@ export default function Home() {
    <Wrapper>
      {address ? (
        <Dashboard address={address} />
+    
      ) : (
        <Wallet>
-         <Button onClick={() => connectWallet('Jack in, Megaman. Execute!')}>
+         <Button onClick={() => connectWallet('injected')}>
            Connect MetaMask 
          </Button>
          <Details>
@@ -30,10 +32,11 @@ const Wrapper = styled.div`
 display: flex; 
 height: 100vh; 
 max-width: 100vw; 
-background-image: url('https://static.cryptobriefing.com/wp-content/uploads/2020/11/02092249/MetaMask-How-to-Guide-cover.jpg');
+background-image: url('https://images.unsplash.com/photo-1636953056323-9c09fdd74fa6?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb');
 background-repeat: no-repeat;
 background-attachment: fixed;
 background-position: center;
+background-size: cover;
 color: white;
 display: grid; 
 place-items: center; 
@@ -53,11 +56,17 @@ padding: 0.8rem;
 font-size: 1.5rem; 
 font-weight: 400; 
 border-radius: 0.5rem; 
-background-color: orangered;
+background-color: orange;
 color: #000; 
+box-shadow: 0px 8px 15px rgba(0.4, 0.3, 0.2, 0.9);
+
 
 &:hover {
   cursor: pointer;
+  background-color: orangered;
+  font-weight: 500;
+  box-shadow: 0px 8px 15px rgba(0.4, 0.3, 0.2, 0.9);
+
 }
 `;
 
