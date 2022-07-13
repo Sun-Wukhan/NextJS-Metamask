@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import Portfolio from './Portfolio'
 
-function Main({walletAddress}) {
+function Main({thirdWebTokens, sanityTokens, walletAddress}) {
   return (
-    <Wrapper><Portfolio  walletAddress={walletAddress}/></Wrapper>
+    <Wrapper><Portfolio walletAddress={walletAddress} sanityTokens={sanityTokens} thirdWebTokens={thirdWebTokens} /></Wrapper>
   )
 }
 

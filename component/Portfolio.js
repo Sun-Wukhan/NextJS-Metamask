@@ -4,36 +4,26 @@ import { BsThreeDotsVertical } from 'react-icons/bs'
 import Coin from './Coin'
 import { coins } from '../static/coins'
 import BalanceChart from './BalanceChart'
+import { ThirdwebSDK } from '@3rdweb/sdk'
+import { ethers } from 'ethers'
 
-function Portfolio({ twTokens, sanityTokens, walletAddress }) {
-    const [walletBalance, setWalletBalance] = useState(0)
-  const [sender] = useState(walletAddress)
 
-  const getBalance = async activeTwToken => {
-    const balance = await activeTwToken.balanceOf(sender)
+function Portfolio({thirdWebTokens, sanityTokens, walletAddress}) {
+  const [walletBalance, setWalletBalance] = useState('')
 
-    return parseInt(balance.displayValue)
-  }
+  const tokenToUSD = {}; 
 
-  // useEffect(() => {
-  //   const calculateTotalBalance = async () => {
-  //     setWalletBalance(0)
+  for (token of sanityTokens)
 
-  //     sanityTokens.map(async token => {
-  //       const currentTwToken = twTokens.filter(
-  //         twToken => twToken.address === token.contractAddress,
-  //       )
-
-  //       const balance = await getBalance(currentTwToken[0])
-  //       setWalletBalance(prevState => prevState + balance * token.usdPrice)
-  //     })
-  //   }
-
-  //   if (sanityTokens.length > 0 && twTokens.length > 0) {
-  //     calculateTotalBalance()
-  //   }
-  // }, [twTokens, sanityTokens])
-
+ 
+  // thirdWebTokens[0]?.balanceOf(walletAddress).then(balance => console.log(Number(balance.displayValue)))
+  // thirdWebTokens[1]?.balanceOf(walletAddress).then(balance => console.log(Number(balance.displayValue)))
+  // thirdWebTokens[2]?.balanceOf(walletAddress).then(balance => console.log(Number(balance.displayValue)))
+  
+  
+  // console.log("sanityTokens", sanityTokens)
+  // console.log("walletaddress", walletAddress)
+  
   return (
     <Wrapper>
       <Content>
@@ -43,7 +33,7 @@ function Portfolio({ twTokens, sanityTokens, walletAddress }) {
               <BalanceTitle>Portfolio balance</BalanceTitle>
               <BalanceValue>
                 {'$'}
-                46 000
+                1 360 000
                 {walletBalance.toLocaleString('US')}
               </BalanceValue>
             </Balance>

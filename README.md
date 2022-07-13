@@ -8,7 +8,10 @@ Start DB up:
 Check if Coins and Address Exist:
 ## Etherscan Rinkeby 
 
-```
+*[_type=='coins'] {
+  name
+}
+### Queries in Sanity 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
