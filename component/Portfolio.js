@@ -9,11 +9,35 @@ import { ethers } from 'ethers'
 
 
 function Portfolio({thirdWebTokens, sanityTokens, walletAddress}) {
-  const [walletBalance, setWalletBalance] = useState('')
+  const [walletBalance, setWalletBalance] = useState(0)
 
   const tokenToUSD = {}; 
 
-  for (token of sanityTokens)
+  for (const token of sanityTokens) {
+    tokenToUSD[token.contractAddress] = Number(token.usdPrice)
+  }
+
+
+  const calculateTotalBalance = async () => {
+    const totalBalance = await Promise.all(
+     thirdWebTokens.map(async token => {
+      const balance = await token.balanceOf(walletAddress)
+      return Number(balance.displayValue) * tokenToUSD[token.address]
+     })
+  )
+  // console.log(totalBalance);
+  // console.log(totalBalance.reduce((acc, curr) => acc + curr, 0))
+  setWalletBalance(totalBalance.reduce((acc, curr) => acc + curr, 0))
+}
+
+
+useEffect(() => {
+  calculateTotalBalance();
+}, [thirdWebTokens, sanityTokens])
+
+
+  
+
 
  
   // thirdWebTokens[0]?.balanceOf(walletAddress).then(balance => console.log(Number(balance.displayValue)))
@@ -33,7 +57,6 @@ function Portfolio({thirdWebTokens, sanityTokens, walletAddress}) {
               <BalanceTitle>Portfolio balance</BalanceTitle>
               <BalanceValue>
                 {'$'}
-                1 360 000
                 {walletBalance.toLocaleString('US')}
               </BalanceValue>
             </Balance>
